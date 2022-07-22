@@ -1,0 +1,12 @@
+_aws_profiles()
+{
+    local cur opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    opts=$(cat ${HOME}/.aws/credentials | grep -o '\[[^]]*' | cut -d"[" -f2)
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    return 0
+}
+
+complete -F _aws_profiles awsauth

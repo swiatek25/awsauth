@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+export AWS_PROFILE=$1
+
+# trigger MFA prompt
+aws s3 ls &>/dev/null
+
+AWS_PROFILE=$1 bash

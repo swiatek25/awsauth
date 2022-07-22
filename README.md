@@ -1,29 +1,33 @@
-# README #
+# AWSAUTH #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Simple CLI for switching predefined profiles in AWS accounts (with autocomplete).
 
-### What is this repository for? ###
+## How do I get set up? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Configure *base* profile
+Login to AWS console in management account. 
+Retrieve AWS credentials and setup profile named **base** (in ~/.aws/credentials file).
 
-### How do I get set up? ###
+### Configure default CLI setting 
+Update ~/.aws/config file with default settings:
+```properties
+[default]
+output = json
+region = eu-west-1
+```
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+### Generate AWS profile credentials
+Execute `./generate_credentials.sh` script. It will use **base** profile configured previously to fetch
+MFA device settings and create predefined environment specific profiles.
 
-### Contribution guidelines ###
+*NOTE*: Profiles can be edited in `./templates/credentials.tmpl` file.
 
-* Writing tests
-* Code review
-* Other guidelines
+### Configure awsauth and autocomplete
+Execute `./configure.sh` script. It will deploy CLI script together with autocomplete support.
 
-### Who do I talk to? ###
+## Usage 
+`awsauth $profile` use [TAB] to get autocomplete on available profiles.
 
-* Repo owner or admin
-* Other community or team contact
+## Contribution guidelines ###
+
+Feel free to create PR with improvements you may miss in the current version.
